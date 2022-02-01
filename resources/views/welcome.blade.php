@@ -54,7 +54,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formulario" action="{{route('formulario')}}" method="POST">
+                    <form id="formulario" action="{{route('formulario')}}" method="GET">
                         @csrf
                         <div class="container">
                             <input type="hidden" name="consulta" value="1">

@@ -115,8 +115,8 @@
                             @foreach($sintomas as $sintoma)
                                 <div class="form-group col-sm-4 flex-column d-flex">
                                     <div class="form-check">
-                                        <input class="checkboxes form-check-input" type="checkbox" value="{{$sintoma->nome}}" id="{{$sintoma->nome}}"
-                                               name="sintomas[]" required oninvalid="this.setCustomValidity('Selecione ao menos uma opção de sintoma!')">
+                                        <input class="checkboxes" type="checkbox" value="{{$sintoma->nome}}" id="{{$sintoma->nome}}"
+                                               name="sintomas[]">
                                         <label class="form-check-label" for="{{$sintoma->nome}}">
                                             {{$sintoma->nome}}
                                         </label>
@@ -158,7 +158,7 @@
 
                         <div class="row justify-content-end" style="margin-top: 5%">
                             <div class="form-group col-sm-6">
-                                <button type="submit" class="btn-block btn-primary">Solicitar Exame</button>
+                                <button type="submit" class="submit btn-block btn-primary">Solicitar Exame</button>
                             </div>
                         </div>
                     </form>
@@ -235,16 +235,14 @@
     </style>
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(".submit").click(function(){
             var checkboxes = $('.checkboxes');
-            checkboxes.change(function(){
-                if($('.checkboxes:checked').length>0) {
-                    checkboxes.removeAttr('required');
-                } else {
-                    checkboxes.attr('required', 'required');
-                }
-            });
+            if ($('.checkboxes').filter(':checked').length < 1){
+                alert("Selecione ao menos uma opção de sintoma!");
+                return false;
+            }
         });
     </script>
+
 @endsection
 

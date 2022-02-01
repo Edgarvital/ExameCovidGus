@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('/formulario', [\App\Http\Controllers\HomeController::class, 'formulario'])->name('formulario');
+Route::get('/formulario', [\App\Http\Controllers\HomeController::class, 'formulario'])->name('formulario');
 Route::post('/formulario/criar', [\App\Http\Controllers\HomeController::class, 'criarFormulario'])->name('criar_formulario');
 
 Route::get('/', function () {
