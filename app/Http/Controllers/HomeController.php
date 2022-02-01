@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sintoma;
+use App\Models\Solicitante;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,7 +22,14 @@ class HomeController extends Controller
     public function formulario(Request $request)
     {
         $sintomas = Sintoma::all();
-        return view('solicitacao.formulario', ['cpf' => $request->cpf, 'sintomas' => $sintomas]);
+        $racas = Solicitante::RACA_ENUM;
+        $sexos = Solicitante::SEXO_ENUM;
+        return view('solicitacao.formulario', ['cpf' => $request->cpf, 'sintomas' => $sintomas, 'racas' => $racas, 'sexos' => $sexos]);
+    }
+
+    public function criarFormulario(Request $request)
+    {
+        return dd($request);
     }
 
 }

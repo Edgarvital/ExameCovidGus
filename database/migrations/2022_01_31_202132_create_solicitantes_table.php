@@ -23,7 +23,7 @@ class CreateSolicitantesTable extends Migration
             $table->string("cpf");
             $table->string("cartao_sus");
             $table->string("telefone_1");
-            $table->string("telefone_2");
+            $table->string("telefone_2")->nullable();
 
 
             $table->timestamps();

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Solicitante extends Model
 {
-    public const SEXO_ENUM = ["Masculino", "Feminino", "Não informar"];
-    public const RACA_ENUM = ["Pardo", "Branco", "Negro", "Indígena", "Amarelo" ,"Não informar"];
+    public const SEXO_ENUM = ["Masculino", "Feminino"];
+    public const RACA_ENUM = ["Pardo", "Branco", "Negro", "Indígena", "Amarelo"];
 
     protected $fillable = [
         "nome",
