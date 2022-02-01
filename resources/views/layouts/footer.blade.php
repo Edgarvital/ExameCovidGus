@@ -1,5 +1,5 @@
 <!-- rodapé -->
-<div style="background-color:#ab9c3c; display: flex; flex-wrap: wrap;">
+<div style="background-color:#508f62; display: flex; flex-wrap: wrap;">
     <div class="container">
         <div class="row">
             <div class="col-sm">
