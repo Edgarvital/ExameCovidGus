@@ -119,7 +119,7 @@
                             @foreach($sintomas as $sintoma)
                                 <div class="form-group col-sm-4 flex-column d-flex">
                                     <div class="form-check">
-                                        <input class="checkboxes" type="checkbox" value="{{$sintoma->nome}}"
+                                        <input class="checkboxes form-check-input" type="checkbox" value="{{$sintoma->nome}}"
                                                id="{{$sintoma->nome}}"
                                                name="sintomas[]">
                                         <label class="form-check-label" for="{{$sintoma->nome}}">
