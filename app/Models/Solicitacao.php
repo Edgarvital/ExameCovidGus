@@ -19,7 +19,7 @@ class Solicitacao extends Model
 
     public function endereco()
     {
-        return $this->hasOne(Endereco::class, 'solicitaca_id', 'id');
+        return $this->belongsTo(Endereco::class, 'endereco_id', 'id');
     }
 
     public function sintomas()

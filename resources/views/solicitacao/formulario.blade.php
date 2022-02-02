@@ -12,7 +12,7 @@
                 <div class="card">
                     <h4>Dados Pessoais</h4>
                     <hr style="width: 100%; margin-top: 0px">
-                    <form class="form-card" action="{{route('criar_formulario')}}" method="POST">
+                    <form class="form-card" action="{{route('solicitar')}}" method="POST">
                         @csrf
                         <input type="hidden" name="cpf" value="{{$cpf}}">
 
@@ -20,7 +20,8 @@
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Nome Completo<span
                                         class="text-danger"> *</span></label>
-                                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required></div>
+                                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo"
+                                       required></div>
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Cartão do SUS<span
                                         class="text-danger"> *</span></label>
@@ -49,14 +50,15 @@
                                 <select class="form-select" id="raca" name="raca" required>
                                     <option value="" selected disabled>Selecione sua Raça/Cor</option>
                                     @foreach($racas as $raca)
-                                    <option value="{{$raca}}">{{$raca}}</option>
+                                        <option value="{{$raca}}">{{$raca}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Sexo<span class="text-danger"> *</span>
                                 </label>
-                                <select class="form-select" aria-label="Default select example" id="sexo" name="sexo" required>
+                                <select class="form-select" aria-label="Default select example" id="sexo" name="sexo"
+                                        required>
                                     <option value="" selected disabled>Selecione seu sexo</option>
                                     @foreach($sexos as $sexo)
                                         <option value="{{$sexo}}">{{$sexo}}</option>
@@ -84,7 +86,8 @@
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Logradouro<span
                                         class="text-danger"> *</span></label>
-                                <input type="text" id="logradouro" name="logradouro" placeholder="Digite o logradouro" required>
+                                <input type="text" id="logradouro" name="logradouro" placeholder="Digite o logradouro"
+                                       required>
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Bairro<span
@@ -110,12 +113,14 @@
                         <h4>Sintomas</h4>
                         <hr style="width: 100%; margin-top: 0px">
 
+
                         <div class="row justify-content-between text-left" style="margin-left: 5%">
 
                             @foreach($sintomas as $sintoma)
                                 <div class="form-group col-sm-4 flex-column d-flex">
                                     <div class="form-check">
-                                        <input class="checkboxes" type="checkbox" value="{{$sintoma->nome}}" id="{{$sintoma->nome}}"
+                                        <input class="checkboxes" type="checkbox" value="{{$sintoma->nome}}"
+                                               id="{{$sintoma->nome}}"
                                                name="sintomas[]">
                                         <label class="form-check-label" for="{{$sintoma->nome}}">
                                             {{$sintoma->nome}}
@@ -123,6 +128,17 @@
                                     </div>
                                 </div>
                             @endforeach
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-12 flex-column d-flex">
+                                <label class="form-control-label px-3">Data do Inicio dos Sintomas:<span
+                                        class="text-danger"> *</span></label>
+                                <input type="date"
+                                       id="data_inicio_sintoma"
+                                       placeholder="dd/mm/aaaa" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
+                                       name="data_inicio_sintomas" value="{{old('data_inicio_sintomas')}}" required>
+                            </div>
                         </div>
 
                         <h4>Contato de Positivo</h4>
@@ -139,7 +155,8 @@
                                 </label>
 
                                 <input type="number" id="dias_contato" name="dias_contato"
-                                       placeholder="Digite a quantidades de dias desde o contato com o positivo" required>
+                                       placeholder="Digite a quantidades de dias desde o contato com o positivo"
+                                       required>
                             </div>
                         </div>
 
@@ -235,9 +252,9 @@
     </style>
 
     <script type="text/javascript">
-        $(".submit").click(function(){
+        $(".submit").click(function () {
             var checkboxes = $('.checkboxes');
-            if ($('.checkboxes').filter(':checked').length < 1){
+            if ($('.checkboxes').filter(':checked').length < 1) {
                 alert("Selecione ao menos uma opção de sintoma!");
                 return false;
             }

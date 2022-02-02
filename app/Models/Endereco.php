@@ -17,7 +17,7 @@ class Endereco extends Model
 
     public function solicitacao()
     {
-        return $this->belongsTo(Solicitacao::class, 'solicitaca_id', 'id');
+        return $this->hasOne(Solicitacao::class, 'endereco_id', 'id');
     }
     use HasFactory;
 }
