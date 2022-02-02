@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SolicitacaoSintoma extends Migration
+class CreateContatosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class SolicitacaoSintoma extends Migration
      */
     public function up()
     {
-        Schema::create('solicitacao_sintoma', function (Blueprint $table) {
+        Schema::create('contatos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("sintoma_id");
-            $table->unsignedBigInteger("solici_id");
+            $table->string("nome");
+            $table->integer('dias_contato');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class SolicitacaoSintoma extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('solicitacao_sintoma');
+        Schema::dropIfExists('contatos');
     }
 }

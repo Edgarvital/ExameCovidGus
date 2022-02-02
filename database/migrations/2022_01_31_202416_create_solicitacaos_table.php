@@ -16,7 +16,18 @@ class CreateSolicitacaosTable extends Migration
         Schema::create('solicitacaos', function (Blueprint $table) {
             $table->id();
             $table->date("data_inicio_sintoma");
+            $table->string('status');
+            $table->string('nomes_contatos');
+
+            $table->unsignedBigInteger("endereco_id");
+            $table->foreign('endereco_id')->references('id')->on('enderecos');
+
             $table->unsignedBigInteger("solicitante_id");
+            $table->foreign('solicitante_id')->references('id')->on('solicitantes');
+
+            $table->unsignedBigInteger("contato_id");
+            $table->foreign('contato_id')->references('id')->on('contatos');
+
             $table->timestamps();
         });
     }
