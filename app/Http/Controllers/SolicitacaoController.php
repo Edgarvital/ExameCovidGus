@@ -46,13 +46,6 @@ class SolicitacaoController extends Controller
 
         $endereco->save();
 
-        //Criação do Contato Positivo
-        $contato = new Contato();
-        $contato->nome = $request->nome_contato;
-        $contato->dias_contato = $request->dias_contato;
-
-        $contato->save();
-
         //Criação da Solicitação
         $solicitacao = new Solicitacao();
         $solicitacao->status = 'Aguardando Avaliação';
@@ -60,17 +53,33 @@ class SolicitacaoController extends Controller
         $solicitacao->nomes_contatos = $request->nomes_contatos;
         $solicitacao->solicitante_id = $solicitante->id;
         $solicitacao->endereco_id = $endereco->id;
-        $solicitacao->contato_id = $contato->id;
 
         $solicitacao->save();
-
+        $sintoma_nenhum = null;
         //Criação dos Sintomas
         foreach ($request->sintomas as $sintoma) {
+            if($sintoma == 'Nenhum')
+            {
+                $sintoma_nenhum = $sintoma;
+            }
             $solicitacao_sintomas = new SolicitacaoSintoma();
             $sintoma = Sintoma::where('nome', '=', $sintoma)->first();
             $solicitacao_sintomas->sintoma_id = $sintoma->id;
             $solicitacao_sintomas->solicitacao_id = $solicitacao->id;
             $solicitacao_sintomas->save();
+        }
+
+        if($sintoma_nenhum != null)
+        {
+            //Criação do Contato Positivo
+            $contato = new Contato();
+            $contato->nome = $request->nome_contato;
+            $contato->dias_contato = $request->dias_contato;
+
+            $solicitacao->contato_id = $contato->id;
+            $solicitacao->update();
+
+            $contato->save();
         }
 
         return view('welcome');

@@ -25,7 +25,7 @@ class CreateSolicitacaosTable extends Migration
             $table->unsignedBigInteger("solicitante_id");
             $table->foreign('solicitante_id')->references('id')->on('solicitantes');
 
-            $table->unsignedBigInteger("contato_id");
+            $table->unsignedBigInteger("contato_id")->nullable();
             $table->foreign('contato_id')->references('id')->on('contatos');
 
             $table->timestamps();
