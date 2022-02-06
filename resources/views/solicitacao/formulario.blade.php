@@ -119,7 +119,8 @@
                             @foreach($sintomas as $sintoma)
                                 <div class="form-group col-sm-4 flex-column d-flex">
                                     <div class="form-check">
-                                        <input class="checkboxes form-check-input" type="checkbox" value="{{$sintoma->nome}}"
+                                        <input class="checkboxes form-check-input" type="checkbox"
+                                               value="{{$sintoma->nome}}"
                                                id="{{$sintoma->nome}}"
                                                name="sintomas[]">
                                         <label class="form-check-label" for="{{$sintoma->nome}}">
@@ -140,23 +141,25 @@
                                        name="data_inicio_sintomas" value="{{old('data_inicio_sintomas')}}" required>
                             </div>
                         </div>
+                        <div id="contatoPositivo" style="display:none;">
+                            <h4>Contato de Positivo</h4>
+                            <hr style="width: 100%; margin-top: 0px">
 
-                        <h4>Contato de Positivo</h4>
-                        <hr style="width: 100%; margin-top: 0px">
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Nome do Contato:<span
+                                            class="text-danger"> *</span></label>
+                                    <input type="text" id="nome_contato" name="nome_contato"
+                                           placeholder="Digite o nome do contato" required></div>
+                                <div class="form-group col-sm-6 flex-column d-flex">
+                                    <label class="form-control-label px-3">Dias desde o contato: <span
+                                            class="text-danger"> *</span>
+                                    </label>
 
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Nome do Contato:<span
-                                        class="text-danger"> *</span></label>
-                                <input type="text" id="nome_contato" name="nome_contato"
-                                       placeholder="Digite o nome do contato" required></div>
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3">Dias desde o contato: <span class="text-danger"> *</span>
-                                </label>
-
-                                <input type="number" id="dias_contato" name="dias_contato"
-                                       placeholder="Digite a quantidades de dias desde o contato com o positivo"
-                                       required>
+                                    <input type="number" id="dias_contato" name="dias_contato"
+                                           placeholder="Digite a quantidades de dias desde o contato com o positivo"
+                                           required>
+                                </div>
                             </div>
                         </div>
 
@@ -183,6 +186,45 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(".submit").click(function () {
+            if ($('.checkboxes').filter(':checked').length < 1) {
+                alert("Selecione ao menos uma opção de sintoma!");
+                return false;
+            }
+        });
+    </script>
+
+    <script>
+        //Ajustes de contato de positivo
+        $(function () {
+            $("#Nenhum").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#contatoPositivo").slideDown();
+                    $('.checkboxes').each(function () {
+                        if (!$(this).prop('checked')) {
+                            $(this).prop('disabled', true);
+                        } else {
+                            $(this).prop('checked', false);
+                            $(this).prop('disabled', true);
+                        }
+                    });
+                    $(this).prop('checked', true);
+                    $(this).prop('disabled', false)
+                    $("#nome_contato").attr('required', true)
+                    $("#dias_contato").attr('required', true)
+                } else {
+                    $("#contatoPositivo").slideUp();
+                    $('.checkboxes').each(function () {
+                        $(this).prop('disabled', false);
+                    });
+                    $("#nome_contato").attr('required', false)
+                    $("#dias_contato").attr('required', false)
+                }
+            });
+        });
+    </script>
 
     <style>
 
@@ -251,15 +293,7 @@
         }
     </style>
 
-    <script type="text/javascript">
-        $(".submit").click(function () {
-            var checkboxes = $('.checkboxes');
-            if ($('.checkboxes').filter(':checked').length < 1) {
-                alert("Selecione ao menos uma opção de sintoma!");
-                return false;
-            }
-        });
-    </script>
+
 
 @endsection
 

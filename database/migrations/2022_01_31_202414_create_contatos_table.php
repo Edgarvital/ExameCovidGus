@@ -15,8 +15,8 @@ class CreateContatosTable extends Migration
     {
         Schema::create('contatos', function (Blueprint $table) {
             $table->id();
-            $table->string("nome");
-            $table->integer('dias_contato');
+            $table->string("nome")->nullable();
+            $table->integer('dias_contato')->nullable();
             $table->timestamps();
         });
     }
