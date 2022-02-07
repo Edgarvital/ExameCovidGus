@@ -58,7 +58,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content" style="border-radius: 12px;">
                 <div class="modal-header"
-                     style="background-color: #FF545A; color: #fff; border-top-left-radius: 12px; border-top-right-radius: 12px; ">
+                     style="background-color: #508f62; color: #fff; border-top-left-radius: 12px; border-top-right-radius: 12px; ">
                     <h5 class="modal-title" id="modalFormulario">FORMULÁRIO</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -70,7 +70,7 @@
                         <div class="container">
                             <input type="hidden" name="consulta" value="1">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <label for="inputCPF" class="style_titulo_input">CPF <span
                                             class="style_titulo_campo">*</span><span class="style_subtitulo_input"> (obrigatório)</span>
                                     </label>
@@ -84,6 +84,14 @@
                                         <strong>{{$message}}</strong>
                                     </div>
                                     @enderror
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <label style="color: red">Para ignorar o bloqueio de 60 dias em caso de exame
+                                        negativo, marque a opção abaixo: </label>
+                                    <input class="form-check-input" type="checkbox"
+                                           id="negativo" name="negativo">
+                                    <label class="negativo" for="flexRadioDefault1">Exame Anterior
+                                        Negativado <br><span class="style_subtitulo_input"> (Necessário Comprovar)</span></label>
                                 </div>
                             </div>
                             <br>

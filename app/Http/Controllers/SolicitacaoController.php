@@ -53,6 +53,11 @@ class SolicitacaoController extends Controller
         $solicitacao->nomes_contatos = $request->nomes_contatos;
         $solicitacao->solicitante_id = $solicitante->id;
         $solicitacao->endereco_id = $endereco->id;
+        if($request->negativo != 'false') {
+            $solicitacao->negativo = true;
+        } else {
+            $solicitacao->negativo = false;
+        }
 
         $solicitacao->save();
         $sintoma_nenhum = null;

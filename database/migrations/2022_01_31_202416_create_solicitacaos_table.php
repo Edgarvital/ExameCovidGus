@@ -18,6 +18,7 @@ class CreateSolicitacaosTable extends Migration
             $table->date("data_inicio_sintoma");
             $table->string('status');
             $table->string('nomes_contatos');
+            $table->boolean('negativo');
 
             $table->unsignedBigInteger("endereco_id");
             $table->foreign('endereco_id')->references('id')->on('enderecos');

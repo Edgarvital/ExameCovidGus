@@ -15,6 +15,7 @@
                     <form class="form-card" action="{{route('solicitar')}}" method="POST">
                         @csrf
                         <input type="hidden" name="cpf" value="{{$cpf}}">
+                        <intup type="hidden" name="negativo" value="{{$negativo}}">
 
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
@@ -150,15 +151,14 @@
                                     <label class="form-control-label px-3">Nome do Contato:<span
                                             class="text-danger"> *</span></label>
                                     <input type="text" id="nome_contato" name="nome_contato"
-                                           placeholder="Digite o nome do contato" required></div>
+                                           placeholder="Digite o nome do contato"></div>
                                 <div class="form-group col-sm-6 flex-column d-flex">
                                     <label class="form-control-label px-3">Dias desde o contato: <span
                                             class="text-danger"> *</span>
                                     </label>
 
                                     <input type="number" id="dias_contato" name="dias_contato"
-                                           placeholder="Digite a quantidades de dias desde o contato com o positivo"
-                                           required>
+                                           placeholder="Digite a quantidades de dias desde o contato com o positivo">
                                 </div>
                             </div>
                         </div>
