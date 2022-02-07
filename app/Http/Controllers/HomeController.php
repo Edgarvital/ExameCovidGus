@@ -25,6 +25,10 @@ class HomeController extends Controller
 
     public function formulario(Request $request)
     {
+        $validated = $request->validate([
+            'cpf' => ['required', 'cpf'],
+        ]);
+
         $solicitante = Solicitante::where('cpf', '=', $request->cpf)->first();
         $solicitacao = null;
         if($solicitante != null)
