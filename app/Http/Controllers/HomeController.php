@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Endereco;
 use App\Models\Sintoma;
 use App\Models\Solicitacao;
 use App\Models\Solicitante;
@@ -49,8 +50,9 @@ class HomeController extends Controller
             $sintomas = Sintoma::all();
             $racas = Solicitante::RACA_ENUM;
             $sexos = Solicitante::SEXO_ENUM;
+            $endereco = Endereco::find($solicitacao->endereco_id);
             return view('solicitacao.formulario', ['cpf' => $request->cpf, 'sintomas' => $sintomas, 'racas' => $racas, 'sexos' => $sexos,
-                'negativo' => $request->negativo, 'solicitacao' => $solicitacao]);
+                'negativo' => $request->negativo, 'solicitacao' => $solicitacao, 'solicitante' => $solicitante, 'endereco' => $endereco]);
         }
 
         //Caso em que não existe registro do solicitante ainda
@@ -58,7 +60,7 @@ class HomeController extends Controller
             $sintomas = Sintoma::all();
             $racas = Solicitante::RACA_ENUM;
             $sexos = Solicitante::SEXO_ENUM;
-            return view('solicitacao.formulario', ['cpf' => $request->cpf, 'sintomas' => $sintomas, 'racas' => $racas, 'sexos' => $sexos, 'negativo' => $request->negativo]);
+            return view('solicitacao.formulario', ['cpf' => $request->cpf, 'sintomas' => $sintomas, 'racas' => $racas, 'sexos' => $sexos, 'negativo' => $request->negativo, 'solicitante' => "", 'endereco' => ""]);
         }
     }
 

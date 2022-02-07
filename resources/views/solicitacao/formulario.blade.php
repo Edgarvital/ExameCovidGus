@@ -15,19 +15,20 @@
                     <form class="form-card" action="{{route('solicitar')}}" method="POST">
                         @csrf
                         <input type="hidden" name="cpf" value="{{$cpf}}">
-                        <intup type="hidden" name="negativo" value="{{$negativo}}">
+                        <input type="hidden" name="negativo" value="{{$negativo}}">
 
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Nome Completo<span
                                         class="text-danger"> *</span></label>
                                 <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo"
-                                       required></div>
+                                       required @if($solicitante != null && $solicitante->nome !=null) value="{{old('nome',$solicitante->nome)}}"@endif></div>
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Cartão do SUS<span
                                         class="text-danger"> *</span></label>
-                                <input type="text" id="cartaosus" name="cartaosus"
-                                       placeholder="Digite seu Cartão do SUS" required>
+                                <input type="text" id="cartaosus" name="cartaosus" class="sus"
+                                       placeholder="Digite seu Cartão do SUS" required
+                                       @if($solicitante != null && $solicitante->cartao_sus !=null) value="{{old('cartaosus',$solicitante->cartao_sus)}}" @endif >
                             </div>
                         </div>
 
@@ -35,12 +36,14 @@
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Telefone 1<span
                                         class="text-danger"> *</span></label>
-                                <input type="text" id="tel1" name="tel1"
-                                       placeholder="Digite o número do primeiro telefone" required></div>
+                                <input type="text" id="tel1" name="tel1" class="telefone"
+                                       placeholder="Digite o número do primeiro telefone" required
+                                       @if($solicitante != null && $solicitante->telefone_1 !=null) value="{{old('tel1',$solicitante->telefone_1)}}"@endif></div>
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Telefone 2</label>
-                                <input type="text" id="tel2" name="tel2"
-                                       placeholder="Digite o número do segundo telefone">
+                                <input type="text" id="tel2" name="tel2" class="telefone"
+                                       placeholder="Digite o número do segundo telefone"
+                                       @if($solicitante != null && $solicitante->telefone_2 !=null) value="{{old('tel2',$solicitante->telefone_2)}}"@endif>
                             </div>
                         </div>
 
@@ -51,7 +54,9 @@
                                 <select class="form-select" id="raca" name="raca" required>
                                     <option value="" selected disabled>Selecione sua Raça/Cor</option>
                                     @foreach($racas as $raca)
-                                        <option value="{{$raca}}">{{$raca}}</option>
+                                        <option value="{{$raca}}"
+                                        <?php if ($solicitante != null && $solicitante->raca==$raca) echo 'selected' ;?>
+                                        >{{$raca}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -62,7 +67,9 @@
                                         required>
                                     <option value="" selected disabled>Selecione seu sexo</option>
                                     @foreach($sexos as $sexo)
-                                        <option value="{{$sexo}}">{{$sexo}}</option>
+                                        <option value="{{$sexo}}"
+                                        <?php if ($solicitante != null && $solicitante->sexo==$sexo) echo 'selected' ;?>
+                                        >{{$sexo}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -76,7 +83,8 @@
                                 <input type="date" class="@error('data_de_nascimento') is-invalid @enderror"
                                        id="inputData"
                                        placeholder="dd/mm/aaaa" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
-                                       name="data_de_nascimento" value="{{old('data_de_nascimento')}}" required>
+                                       name="data_de_nascimento" required
+                                       @if($solicitante != null && $solicitante->data_nascimento !=null) value="{{old('data_de_nascimento',$solicitante->data_nascimento)}}" @else value="{{old('data_de_nascimento')}}" @endif>
                             </div>
                         </div>
 
@@ -88,13 +96,15 @@
                                 <label class="form-control-label px-3">Logradouro<span
                                         class="text-danger"> *</span></label>
                                 <input type="text" id="logradouro" name="logradouro" placeholder="Digite o logradouro"
-                                       required>
+                                       required
+                                       @if($endereco != null && $endereco->logradouro !=null) value="{{old('logradouro',$endereco->logradouro)}}"@endif>
                             </div>
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Bairro<span
                                         class="text-danger"> *</span></label>
                                 <input type="text" id="bairro" name="bairro"
-                                       placeholder="Digite o bairro" required>
+                                       placeholder="Digite o bairro" required
+                                       @if($endereco != null && $endereco->bairro !=null) value="{{old('bairro',$endereco->bairro)}}"@endif>
                             </div>
                         </div>
 
@@ -103,11 +113,13 @@
                                 <label class="form-control-label px-3">Numero<span
                                         class="text-danger"> *</span></label>
                                 <input type="text" id="numero" name="numero"
-                                       placeholder="Digite o número da residência" required></div>
+                                       placeholder="Digite o número da residência" required
+                                       @if($endereco != null && $endereco->numero !=null) value="{{old('numero',$endereco->numero)}}"@endif></div>
                             <div class="form-group col-sm-6 flex-column d-flex">
                                 <label class="form-control-label px-3">Complemento</label>
                                 <input type="text" id="complemento" name="complemento"
-                                       placeholder="Digite o complemento">
+                                       placeholder="Digite o complemento"
+                                       @if($endereco != null && $endereco->complemento !=null) value="{{old('complemento',$endereco->complemento)}}"@endif>
                             </div>
                         </div>
 
@@ -223,6 +235,22 @@
                     $("#dias_contato").attr('required', false)
                 }
             });
+        });
+    </script>
+
+    <script>
+        //Máscaras
+        $(document).ready(function() {
+            var SPMaskBehavior = function (val) {
+                    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+                },
+                spOptions = {
+                    onKeyPress: function (val, e, field, options) {
+                        field.mask(SPMaskBehavior.apply({}, arguments), options);
+                    }
+                };
+            $('.telefone').mask(SPMaskBehavior, spOptions);
+            $('.sus').mask('000 0000 0000 0000');
         });
     </script>
 
