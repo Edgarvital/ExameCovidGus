@@ -23,5 +23,8 @@ Route::get('/home', function(){
     return redirect(route('home'));
 });
 
+Route::middleware(['auth'])->group(function () {
+});
+
 Auth::routes();
 
