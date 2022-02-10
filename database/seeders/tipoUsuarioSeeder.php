@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class tipoUsuarioSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class tipoUsuarioSeeder extends Seeder
         $tipos = ['Administrador'];
 
         for ($i = 0; $i < sizeof($tipos); $i++) {
-            DB::table('tipoUsuarios')->insert([
+            DB::table('tipo_usuarios')->insert([
                 'tipo' => $tipos[$i],
             ]);
         }
