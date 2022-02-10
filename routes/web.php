@@ -19,12 +19,17 @@ Route::post('/formulario/criar', [\App\Http\Controllers\HomeController::class, '
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/solicitar', [\App\Http\Controllers\SolicitacaoController::class, 'criarSolicitacao'])->name('solicitar');
 
+
+
 Route::get('/home', function () {
     return redirect(route('home'));
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/{ponto_id}/gerarDias', [\App\Http\Controllers\UsuarioController::class, 'gerarDiasPonto'])->name('gerar_dias_ponto');
+    Route::post('/criarPonto', [\App\Http\Controllers\UsuarioController::class, 'criarPonto'])->name('criar_ponto');
+    Route::get('/cadastrarPonto', [App\Http\Controllers\UsuarioController::class, 'cadastrarPonto'])->name('cadastrar_ponto');
+
     Route::get('/pontos', [\App\Http\Controllers\UsuarioController::class, 'listarPontos'])->name('pontos');
 });
 
