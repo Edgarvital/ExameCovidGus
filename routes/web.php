@@ -25,6 +25,7 @@ Route::get('/home', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/{ponto_id}/gerarDias', [\App\Http\Controllers\UsuarioController::class, 'gerarDiasPonto'])->name('gerar_dias_ponto');
+    Route::get('/pontos', [\App\Http\Controllers\UsuarioController::class, 'listarPontos'])->name('pontos');
 });
 
 Auth::routes();

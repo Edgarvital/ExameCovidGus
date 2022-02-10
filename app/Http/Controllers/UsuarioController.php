@@ -44,4 +44,10 @@ class UsuarioController extends Controller
         return redirect(route('dashboard'))->with('sucess', 'Dias gerados para o ponto ' . $ponto->nome. ' com sucesso!');
 
     }
+
+    function listarPontos()
+    {
+        $pontos = Ponto::all();
+        return view('ponto.listar', compact('pontos'));
+    }
 }
