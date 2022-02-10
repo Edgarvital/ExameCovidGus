@@ -19,7 +19,7 @@ class UsuarioController extends Controller
         $ponto->usuario_id = Auth::user()->id;
         $ponto->save();
 
-        return redirect(route('dashboard'))->with('sucess', 'Ponto '.$ponto->nome. ' Cadastrado com Sucesso!\nPreencha as informações sobre os dias e horários de funcionamento.');
+        return redirect(route('home'))->with('sucess', 'Ponto '.$ponto->nome. ' Cadastrado com Sucesso!'.'<br>'.'Preencha as informações sobre os dias e horários de funcionamento.');
     }
 
     function gerarDiasPonto($ponto_id)
@@ -44,4 +44,9 @@ class UsuarioController extends Controller
         return redirect(route('dashboard'))->with('sucess', 'Dias gerados para o ponto ' . $ponto->nome. ' com sucesso!');
 
     }
+
+    public function formPonto(){
+        return view('ponto.cadastro');
+    }
+
 }
