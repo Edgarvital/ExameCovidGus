@@ -23,5 +23,9 @@ Route::get('/home', function(){
     return redirect(route('home'));
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/{ponto_id}/gerarDias', [\App\Http\Controllers\UsuarioController::class, 'gerarDiasPonto'])->name('gerar_dias_ponto');
+});
+
 Auth::routes();
 

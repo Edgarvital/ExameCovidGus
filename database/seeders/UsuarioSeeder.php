@@ -21,6 +21,7 @@ class UsuarioSeeder extends Seeder
             'name' => 'Administrar',
             'email' => 'admin@admin.com',
             'email_verified_at' => today(),
+            'cpf' => '106.981.555-45',
             'password' => bcrypt('123456'),
             'tipoUsuario_id' => $tipo->id
         ]);

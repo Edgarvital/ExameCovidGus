@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Endereco;
 use App\Models\Sintoma;
-use App\Models\Solicitacao;
 use App\Models\Solicitante;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DateTime;
