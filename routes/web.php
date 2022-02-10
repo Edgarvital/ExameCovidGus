@@ -27,9 +27,10 @@ Route::get('/home', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/{ponto_id}/gerarDias', [\App\Http\Controllers\UsuarioController::class, 'gerarDiasPonto'])->name('gerar_dias_ponto');
-    Route::post('/cadastrarPonto', [\App\Http\Controllers\UsuarioController::class, 'criarPonto'])->name('criar_ponto');
-    Route::get('/ponto', [App\Http\Controllers\UsuarioController::class, 'formPonto'])->name('form_ponto');
+    Route::post('/criarPonto', [\App\Http\Controllers\UsuarioController::class, 'criarPonto'])->name('criar_ponto');
+    Route::get('/cadastrarPonto', [App\Http\Controllers\UsuarioController::class, 'cadastrarPonto'])->name('cadastrar_ponto');
 
+    Route::get('/pontos', [\App\Http\Controllers\UsuarioController::class, 'listarPontos'])->name('pontos');
 });
 
 Auth::routes();

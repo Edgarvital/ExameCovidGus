@@ -45,8 +45,14 @@ class UsuarioController extends Controller
 
     }
 
-    public function formPonto(){
+    public function cadastrarPonto(){
         return view('ponto.cadastro');
+    }
+
+    function listarPontos()
+    {
+        $pontos = Ponto::all();
+        return view('ponto.listar', compact('pontos'));
     }
 
 }
