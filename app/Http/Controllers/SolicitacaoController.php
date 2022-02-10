@@ -33,6 +33,18 @@ class SolicitacaoController extends Controller
             $solicitante->data_nascimento = $request->data_de_nascimento;
 
             $solicitante->save();
+        }else{
+            $solicitante->cartao_sus = $request->cartaosus;
+            $solicitante->nome = $request->nome;
+            $solicitante->telefone_1 = $request->tel1;
+            if ($request->tel2 != null) {
+                $solicitante->telefone_2 = $request->tel2;
+            }
+            $solicitante->raca = $request->raca;
+            $solicitante->sexo = $request->sexo;
+            $solicitante->data_nascimento = $request->data_de_nascimento;
+
+            $solicitante->update();
         }
 
         //Criação de Endereço

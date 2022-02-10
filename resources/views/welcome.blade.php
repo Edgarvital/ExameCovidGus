@@ -14,6 +14,11 @@
                                         {!! \Session::get('fail') !!}
                                     </div>
                                 @endif
+                                @error('cpf')
+                                    <div class="alert alert-danger" style="width: 100%; text-align: center">
+                                        <strong>O CPF digitado não é válido</strong>
+                                    </div>
+                                @enderror
                                 <div class="col-md-12" style="margin-top: 20px;margin-bottom: 10px;">
                                     <img src="{{asset('/img/examecovid.png')}}" alt="Orientação" width="50%"
                                          height="280px">
@@ -81,7 +86,7 @@
 
                                     @error('cpf')
                                     <div id="validationServer05Feedback" class="invalid-feedback">
-                                        <strong>{{$message}}</strong>
+                                        <strong>O CPF digitado não é válido</strong>
                                     </div>
                                     @enderror
                                 </div>
