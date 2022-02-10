@@ -13,7 +13,7 @@ class Sintoma extends Model
 
     public function solicitacoes()
     {
-        return $this->belongsToMany(Solicitacao::class, 'solicitacao_sintoma',
+        return $this->belongsToMany('App\Models\Solicitacao', 'solicitacao_sintoma',
             'sintoma_id', 'solici_id');
     }
 

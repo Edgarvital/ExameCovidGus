@@ -29,6 +29,9 @@ class CreateSolicitacaosTable extends Migration
             $table->unsignedBigInteger("contato_id")->nullable();
             $table->foreign('contato_id')->references('id')->on('contatos');
 
+            $table->unsignedBigInteger("horario_id");
+            $table->foreign('horario_id')->references('id')->on('horarios');
+
             $table->timestamps();
         });
     }
