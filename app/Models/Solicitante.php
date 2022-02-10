@@ -23,7 +23,7 @@ class Solicitante extends Model
 
     public function solicitacoes()
     {
-        return $this->hasMany(Solicitacao::class, 'solicitante_id', 'id');
+        return $this->hasMany('App\Models\Solicitacao', 'solicitante_id', 'id');
     }
 
 
