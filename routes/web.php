@@ -19,7 +19,7 @@ Route::post('/formulario/criar', [\App\Http\Controllers\HomeController::class, '
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/solicitar', [\App\Http\Controllers\SolicitacaoController::class, 'criarSolicitacao'])->name('solicitar');
 
-Route::get('/home', function(){
+Route::get('/home', function () {
     return redirect(route('home'));
 });
 
