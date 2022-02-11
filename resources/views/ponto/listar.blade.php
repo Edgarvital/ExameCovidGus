@@ -118,13 +118,23 @@
                                         <label for="inicio">Horário de Inicio</label>
                                         <input placeholder="Selecione o Horário" type="text" id="inicioManha"
                                                name="inicioManha"
-                                               class="form-control timepicker">
+                                               class="form-control timepicker" required>
+                                        @error('inicioManha')
+                                        <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                          <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inicio">Horário de Fim</label>
                                         <input placeholder="Selecione o Horário" type="text" id="fimManha"
                                                name="fimManha"
-                                               class="form-control timepicker">
+                                               class="form-control timepicker" required>
+                                        @error('fimManha')
+                                        <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                          <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top: 10px">
@@ -132,7 +142,7 @@
                                     <div class="col-md-6">
                                         <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
                                         <input class="form-control" type="number" name="quantMaxManha"
-                                               id="quantMaxManha" value="">
+                                               id="quantMaxManha" value="" required>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -147,13 +157,23 @@
                                         <label for="inicio">Horário de Inicio</label>
                                         <input placeholder="Selecione o Horário" type="text" id="inicioTarde"
                                                name="inicioTarde"
-                                               class="form-control timepicker manha">
+                                               class="form-control timepicker manha" required>
+                                        @error('inicioTarde')
+                                        <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                          <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inicio">Horário de Fim</label>
                                         <input placeholder="Selecione o Horário" type="text" id="fimTarde"
                                                name="fimTarde"
-                                               class="form-control timepicker">
+                                               class="form-control timepicker" required>
+                                        @error('fimTarde')
+                                        <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                          <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top: 10px">
@@ -161,7 +181,7 @@
                                     <div class="col-md-6">
                                         <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
                                         <input class="form-control" type="number" name="quantMaxTarde"
-                                               id="quantMaxTarde" value="">
+                                               id="quantMaxTarde" value="" required>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -176,13 +196,23 @@
                                         <label for="inicio">Horário de Inicio</label>
                                         <input placeholder="Selecione o Horário" type="text" id="inicioNoite"
                                                name="inicioNoite"
-                                               class="form-control timepicker">
+                                               class="form-control timepicker" required>
+                                        @error('inicioNoite')
+                                        <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                          <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inicio">Horário de Fim</label>
                                         <input placeholder="Selecione o Horário" type="text" id="fimNoite"
                                                name="fimNoite"
-                                               class="form-control timepicker">
+                                               class="form-control timepicker" required>
+                                        @error('fimNoite')
+                                        <span class="invalid-feedback" role="alert" style="overflow: visible; display:block">
+                                          <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top: 10px">
@@ -190,7 +220,7 @@
                                     <div class="col-md-6">
                                         <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
                                         <input class="form-control" type="number" name="quantMaxNoite"
-                                               id="quantMaxNoite" value="">
+                                               id="quantMaxNoite" value="" required>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
