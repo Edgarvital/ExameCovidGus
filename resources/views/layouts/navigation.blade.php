@@ -9,10 +9,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link mx-2" href="#">Dashboard <span class="sr-only">(current)</span></a>
+                <a class="nav-link mx-2" href="{{route('home')}}">Dashboard <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mx-4" href="#">Pontos <span class="sr-only">(current)</span></a>
+                <a class="nav-link mx-4" href="{{route('pontos')}}">Pontos <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
