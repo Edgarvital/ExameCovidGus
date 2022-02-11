@@ -27,7 +27,7 @@
                         @csrf
 
                         <button type="submit" class="dropdown-item">
-                            {{ __('Log Out') }}
+                            {{ __('Sair') }}
                         </button>
                     </form>
                 </div>
