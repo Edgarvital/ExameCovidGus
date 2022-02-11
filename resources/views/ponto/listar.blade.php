@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <style>
+        .ui-timepicker-container {
+            z-index: 3500 !important;
+        }
+    </style>
+
     <div class="container-fluid px-1 py-5 mx-auto">
 
         <div class="row d-flex justify-content-center">
@@ -53,7 +60,7 @@
                     <b>Legenda:</b>
                     <a title="Gerar Dias e Horarios" style="color: #08631c"><i
                             class="fa-solid fa-calendar-plus fa-lg"></i></a>
-                    Gerar Dias e Horários
+                    Gerar Dias e Horários Para o Mês Inteiro
                     <a title="Editar Ponto" href="#" style="color: #2563eb; margin-left: 5px"><i
                             class="fa-solid fa-pen-to-square fa-lg"></i></a>
                     Editar Ponto
@@ -68,7 +75,7 @@
     <!--Modal Para Gerar os Horários -->
 
     <div class="modal fade" id="horariosModal" tabindex="-1" aria-labelledby="horariosModalLabel"
-         aria-hidden="true">
+         aria-hidden="true" style="overflow-y: scroll; max-height:80%;  margin-top: 50px; margin-bottom:50px;">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content" style="border-radius: 12px;">
                 <div class="modal-header"
@@ -79,10 +86,94 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formulario" action="{{route('formulario')}}" method="GET">
+                    <form id="formulario" action="{{}}" method="POST">
                         @csrf
                         <div class="container">
-                           <!-- Time Picker -->
+                            <div id="manha">
+                                <h4 style="text-align: center">Manhã</h4>
+                                <hr style="width: 98%">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="inicio">Horário de Inicio</label>
+                                        <input placeholder="Selecione o Horário" type="text" id="inicioManha" name="inicioManha"
+                                               class="form-control timepicker">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inicio">Horário de Fim</label>
+                                        <input placeholder="Selecione o Horário" type="text" id="fimManha" name="fimManha"
+                                               class="form-control timepicker">
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
+                                        <input class="form-control" type="number" name="quantMaxManha" id="quantMaxManha" value="">
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+                            </div>
+
+                            <div id="tarde" style="margin-top: 5%">
+                                <hr style="width: 98%; margin: 0px">
+                                <h4 style="text-align: center">Tarde</h4>
+                                <hr style="width: 98%; margin: 0px">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="inicio">Horário de Inicio</label>
+                                        <input placeholder="Selecione o Horário" type="text" id="inicioTarde" name="inicioTarde"
+                                               class="form-control timepicker">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inicio">Horário de Fim</label>
+                                        <input placeholder="Selecione o Horário" type="text" id="fimTarde" name="fimTarde"
+                                               class="form-control timepicker">
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
+                                        <input class="form-control" type="number" name="quantMaxTarde" id="quantMaxTarde" value="">
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+                            </div>
+
+                            <div id="noite" style="margin-top: 5%">
+                                <hr style="width: 98%; margin: 0px">
+                                <h4 style="text-align: center">Noite</h4>
+                                <hr style="width: 98%; margin: 0px">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="inicio">Horário de Inicio</label>
+                                        <input placeholder="Selecione o Horário" type="text" id="inicioNoite" name="inicioNoite"
+                                               class="form-control timepicker">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inicio">Horário de Fim</label>
+                                        <input placeholder="Selecione o Horário" type="text" id="fimNoite" name="fimNoite"
+                                               class="form-control timepicker">
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
+                                        <input class="form-control" type="number" name="quantMaxNoite" id="quantMaxNoite" value="">
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-success" style="width: 100%;"
+                                            form="formulario">GERAR DIAS E HORÁRIOS PARA O MÊS ATUAL
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
                     </form>
                 </div>
@@ -90,5 +181,20 @@
         </div>
     </div>
 
+    <script type="text/javascript">
 
+        $(document).ready(function () {
+            $('input.timepicker').timepicker({
+                'timeFormat': 'H:mm',
+                'minTime': '07',
+                'maxTime': '22'
+            });
+
+        });
+
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 @endsection
+
+
