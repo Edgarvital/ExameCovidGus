@@ -25,6 +25,19 @@ class UsuarioController extends Controller
 
     function gerarDiasPonto(Request $request)
     {
+        $request->inicioManha = date('H:i:s',strtotime($request->inicioManha));
+        $request->fimManha = date('H:i:s',strtotime($request->fimManha));
+        $request->inicioTarde = date('H:i:s',strtotime($request->inicioTarde));
+        $request->fimTarde = date('H:i:s',strtotime($request->fimTarde));
+        $request->inicioNoite = date('H:i:s',strtotime($request->inicioNoite));
+        $request->fimNoite = date('H:i:s',strtotime($request->fimNoite));
+
+        $validated = $request->validate([
+            'fimManha'        => ['after:inicioManha'],
+            'fimTarde'        => ['after:inicioTarde'],
+            'fimNoite'        => ['after:inicioNoite'],
+        ]);
+
         $ponto = Ponto::find($request->ponto_id);
 
         $amanha = date('d-m-Y', strtotime(today().'+1 day'));
