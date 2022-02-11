@@ -142,7 +142,7 @@
                                     <div class="col-md-6">
                                         <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
                                         <input class="form-control" type="number" name="quantMaxManha"
-                                               id="quantMaxManha" value="">
+                                               id="quantMaxManha" value="" required>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -181,7 +181,7 @@
                                     <div class="col-md-6">
                                         <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
                                         <input class="form-control" type="number" name="quantMaxTarde"
-                                               id="quantMaxTarde" value="">
+                                               id="quantMaxTarde" value="" required>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -220,7 +220,7 @@
                                     <div class="col-md-6">
                                         <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
                                         <input class="form-control" type="number" name="quantMaxNoite"
-                                               id="quantMaxNoite" value="">
+                                               id="quantMaxNoite" value="" required>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
