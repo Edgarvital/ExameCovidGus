@@ -24,8 +24,8 @@
                     </div>
 
                     <div class="row" style="margin-top: 5%">
-                        <div class="form-group col-sm-4 justify-content-start">
-                            <button type="submit" class="submit btn-block btn-danger">Cancelar</button>
+                        <div class="form-group col-sm-4 justify-content-start" style="padding-top: 8px;">
+                            <a type="button" href="{{url()->previous()}}" class="btn btn-block btn-danger">Cancelar</a>
                         </div>
                         <div class="col-sm-4"></div>
                         <div class="form-group col-sm-4 justify-content-end">
