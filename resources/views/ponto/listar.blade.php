@@ -6,12 +6,29 @@
         .ui-timepicker-container {
             z-index: 3500 !important;
         }
+
+        .center {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
     </style>
 
     <div class="container-fluid px-1 py-5 mx-auto">
 
         <div class="row d-flex justify-content-center">
             <div class="col-xl-10 col-lg-8 col-md-9 col-11 text-center">
+
+                @if (\Session::has('sucess'))
+                    <div class="alert alert-success col-md-9 center" style="width: 100%; text-align: center;margin-bottom: 0px;">
+                        {!! \Session::get('sucess') !!}
+                    </div>
+                @endif
+                @if (\Session::has('fail'))
+                    <div class="alert alert-danger col-md-9 center" style="width: 100%; text-align: center;margin-bottom: 0px;">
+                        {!! \Session::get('fail') !!}
+                    </div>
+                @endif
 
                 <div class="card" style="background-color: #508f62; color: white; ">
                     <div class="row">
@@ -86,8 +103,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formulario" action="{{}}" method="POST">
+                    <form id="formulario" action="{{route('gerar_dias_ponto')}}" method="POST" autocapitalize="off"
+                          autocomplete="off" autocorrect="off">
                         @csrf
+                        @if(!empty($ponto))
+                            <input type="hidden" name="ponto_id" value="{{$ponto->id}}">
+                        @endif
                         <div class="container">
                             <div id="manha">
                                 <h4 style="text-align: center">Manhã</h4>
@@ -95,12 +116,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="inicio">Horário de Inicio</label>
-                                        <input placeholder="Selecione o Horário" type="text" id="inicioManha" name="inicioManha"
+                                        <input placeholder="Selecione o Horário" type="text" id="inicioManha"
+                                               name="inicioManha"
                                                class="form-control timepicker">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inicio">Horário de Fim</label>
-                                        <input placeholder="Selecione o Horário" type="text" id="fimManha" name="fimManha"
+                                        <input placeholder="Selecione o Horário" type="text" id="fimManha"
+                                               name="fimManha"
                                                class="form-control timepicker">
                                     </div>
                                 </div>
@@ -108,7 +131,8 @@
                                     <div class="col-md-3"></div>
                                     <div class="col-md-6">
                                         <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
-                                        <input class="form-control" type="number" name="quantMaxManha" id="quantMaxManha" value="">
+                                        <input class="form-control" type="number" name="quantMaxManha"
+                                               id="quantMaxManha" value="">
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -121,12 +145,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="inicio">Horário de Inicio</label>
-                                        <input placeholder="Selecione o Horário" type="text" id="inicioTarde" name="inicioTarde"
-                                               class="form-control timepicker">
+                                        <input placeholder="Selecione o Horário" type="text" id="inicioTarde"
+                                               name="inicioTarde"
+                                               class="form-control timepicker manha">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inicio">Horário de Fim</label>
-                                        <input placeholder="Selecione o Horário" type="text" id="fimTarde" name="fimTarde"
+                                        <input placeholder="Selecione o Horário" type="text" id="fimTarde"
+                                               name="fimTarde"
                                                class="form-control timepicker">
                                     </div>
                                 </div>
@@ -134,7 +160,8 @@
                                     <div class="col-md-3"></div>
                                     <div class="col-md-6">
                                         <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
-                                        <input class="form-control" type="number" name="quantMaxTarde" id="quantMaxTarde" value="">
+                                        <input class="form-control" type="number" name="quantMaxTarde"
+                                               id="quantMaxTarde" value="">
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -147,12 +174,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="inicio">Horário de Inicio</label>
-                                        <input placeholder="Selecione o Horário" type="text" id="inicioNoite" name="inicioNoite"
+                                        <input placeholder="Selecione o Horário" type="text" id="inicioNoite"
+                                               name="inicioNoite"
                                                class="form-control timepicker">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inicio">Horário de Fim</label>
-                                        <input placeholder="Selecione o Horário" type="text" id="fimNoite" name="fimNoite"
+                                        <input placeholder="Selecione o Horário" type="text" id="fimNoite"
+                                               name="fimNoite"
                                                class="form-control timepicker">
                                     </div>
                                 </div>
@@ -160,7 +189,8 @@
                                     <div class="col-md-3"></div>
                                     <div class="col-md-6">
                                         <label for="quantMaxManha">Quantidade Máxima de Solicitações</label>
-                                        <input class="form-control" type="number" name="quantMaxNoite" id="quantMaxNoite" value="">
+                                        <input class="form-control" type="number" name="quantMaxNoite"
+                                               id="quantMaxNoite" value="">
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -184,12 +214,41 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $('input.timepicker').timepicker({
+            $('#inicioManha').timepicker({
                 'timeFormat': 'H:mm',
                 'minTime': '07',
+                'maxTime': '12'
+            });
+
+            $('#fimManha').timepicker({
+                'timeFormat': 'H:mm',
+                'minTime': '08',
+                'maxTime': '12'
+            });
+
+            $('#inicioTarde').timepicker({
+                'timeFormat': 'H:mm',
+                'minTime': '12',
+                'maxTime': '18'
+            });
+
+            $('#fimTarde').timepicker({
+                'timeFormat': 'H:mm',
+                'minTime': '12',
+                'maxTime': '18'
+            });
+
+            $('#inicioNoite').timepicker({
+                'timeFormat': 'H:mm',
+                'minTime': '18',
                 'maxTime': '22'
             });
 
+            $('#fimNoite').timepicker({
+                'timeFormat': 'H:mm',
+                'minTime': '18',
+                'maxTime': '22'
+            });
         });
 
     </script>

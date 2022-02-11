@@ -17,8 +17,9 @@ class CreateHorariosTable extends Migration
             $table->id();
             $table->string('quantSolic');
             $table->string('quantMaxSolic');
-            $table->dateTime("inicio");
-            $table->dateTime("fim");
+            $table->string("inicio");
+            $table->string("fim");
+            $table->string('turno');
 
             $table->unsignedBigInteger("dia_id");
             $table->foreign('dia_id')->references('id')->on('dias');

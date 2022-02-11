@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dia;
+use App\Models\Horario;
 use App\Models\Ponto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,12 +20,19 @@ class UsuarioController extends Controller
         $ponto->usuario_id = Auth::user()->id;
         $ponto->save();
 
-        return redirect(route('home'))->with('sucess', 'Ponto '.$ponto->nome. ' Cadastrado com Sucesso!'.'<br>'.'Preencha as informações sobre os dias e horários de funcionamento.');
+        return redirect(route('pontos'))->with('sucess', 'Ponto '.$ponto->nome. ' Cadastrado com Sucesso!'.'<br>'.'Preencha as informações sobre os dias e horários de funcionamento.');
     }
 
-    function gerarDiasPonto($ponto_id)
+    function gerarDiasPonto(Request $request)
     {
-        $ponto = Ponto::find($ponto_id);
+        $ponto = Ponto::find($request->ponto_id);
+
+        $amanha = date('d-m-Y', strtotime(today().'+1 day'));
+        $diaAmanha = Dia::where('data', $amanha)->first();
+        if($diaAmanha != null)
+        {
+            return redirect(route('pontos'))->with('fail', 'Os dias e horários para este mês já foram criados, por favor edite manualmente os horários ou remova-os e gere novamente os dias e horários.');
+        }
 
         $hoje = today();
         $ultimoDia = date("Y-m-t", strtotime($hoje));
@@ -37,11 +45,38 @@ class UsuarioController extends Controller
         {
             $dia = new Dia();
             $dia->data = date('d-m-Y', strtotime(today().'+'.$i.' day'));
-            $dia->ponto_id = 1;
+            $dia->ponto_id = $ponto->id;
             $dia->save();
+
+            $horarioManha = new Horario();
+            $horarioManha->inicio = $request->inicioManha;
+            $horarioManha->fim = $request->fimManha;
+            $horarioManha->quantMaxSolic = $request->quantMaxManha;
+            $horarioManha->quantSolic = 0;
+            $horarioManha->dia_id = $dia->id;
+            $horarioManha->turno = 'Manhã';
+            $horarioManha->save();
+
+            $horarioTarde = new Horario();
+            $horarioTarde->inicio = $request->inicioTarde;
+            $horarioTarde->fim = $request->fimTarde;
+            $horarioTarde->quantMaxSolic = $request->quantMaxTarde;
+            $horarioTarde->quantSolic = 0;
+            $horarioTarde->dia_id = $dia->id;
+            $horarioTarde->turno = 'Tarde';
+            $horarioTarde->save();
+
+            $horarioNoite = new Horario();
+            $horarioNoite->inicio = $request->inicioNoite;
+            $horarioNoite->fim = $request->fimNoite;
+            $horarioNoite->quantMaxSolic = $request->quantMaxNoite;
+            $horarioNoite->quantSolic = 0;
+            $horarioNoite->dia_id = $dia->id;
+            $horarioNoite->turno = 'Noite';
+            $horarioNoite->save();
         }
 
-        return redirect(route('dashboard'))->with('sucess', 'Dias gerados para o ponto ' . $ponto->nome. ' com sucesso!');
+        return redirect(route('pontos'))->with('sucess', 'Dias gerados para o ponto ' . $ponto->nome. ' com sucesso!');
 
     }
 
