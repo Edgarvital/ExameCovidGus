@@ -252,7 +252,7 @@
 
             $('#fimManha').timepicker({
                 'timeFormat': 'H:mm',
-                'minTime': '08',
+                'minTime': '07',
                 'maxTime': '12'
             });
 
