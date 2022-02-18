@@ -15,18 +15,26 @@
     </style>
 
     <div class="container-fluid px-1 py-5 mx-auto">
-
         <div class="row d-flex justify-content-center">
             <div class="col-xl-10 col-lg-8 col-md-9 col-11 text-center">
 
                 @if (\Session::has('sucess'))
-                    <div class="alert alert-success col-md-9 center" style="width: 100%; text-align: center;margin-bottom: 0px;">
+                    <div class="alert alert-success col-md-12 center" style="width: 100%; text-align: center;margin-bottom: 0px;">
                         {!! \Session::get('sucess') !!}
                     </div>
                 @endif
                 @if (\Session::has('fail'))
-                    <div class="alert alert-danger col-md-9 center" style="width: 100%; text-align: center;margin-bottom: 0px;">
+                    <div class="alert alert-danger col-md-12 center" style="width: 100%; text-align: center;margin-bottom: 0px;">
                         {!! \Session::get('fail') !!}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger col-md-12 center" style="width: 100%; text-align: center;margin-bottom: 0px;">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}
+                                <br>
+                            @endforeach
+
                     </div>
                 @endif
 
